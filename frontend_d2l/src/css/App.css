@@ -1,0 +1,32 @@
+/* App.css or your preferred stylesheet */
+/* App.css */
+
+.MenuBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    background-color: #2196F3;
+    color: #ffffff;
+    list-style-type: none; /* Remove the dot from li elements */
+  }
+  
+  .MenuBox div {
+    display: flex;
+  }
+  
+  .MenuBox a {
+    text-decoration: none;
+    color: #ffffff;
+    margin: 0 15px;
+    padding: 15px;
+  }
+  
+  .MenuBox a:hover {
+    background-color: #1565c0;
+  }
+  
+  .active-link {
+    background-color: #1565c0;
+  }
+  

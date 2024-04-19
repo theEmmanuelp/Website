@@ -1,0 +1,26 @@
+/* /src/css/AdminPage.css */
+
+.Admin {
+  background-color: #808080; /* Set a grey background color */
+  padding: 20px; /* Add padding for better visibility */
+  border-radius: 10px; /* Add border-radius for rounded corners */
+  color: white; /* Set text color to white for better contrast */
+  text-align: center; /* Center text */
+  width: 300px; /* Set a specific width for the box */
+  margin: 0 auto; /* Center the box horizontally using auto margins */
+}
+
+.AdminMenu {
+  list-style-type: none; /* Remove list-style dots */
+  padding: 0; /* Remove default padding on the list */
+}
+
+.AdminMenu li {
+  margin: 8px 0;
+}
+
+.AdminMenu a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold; /* Make the text bold */
+}
