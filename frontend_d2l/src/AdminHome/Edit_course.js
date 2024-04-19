@@ -34,7 +34,7 @@ const EditCourseForm = ({ courseId }) => {
 
     try {
       // Example: Send a PUT request to update the course
-      const response = await axios.put(`/api/edit-course/${courseId}`, courseData);
+      const response = await axios.put(`http://localhost:5000/admin/course/update`, courseData);
       console.log("Edit course response:", response.data);
       // Add any additional logic or state updates as needed
     } catch (error) {

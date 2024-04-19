@@ -9,7 +9,7 @@ const DeleteCourseForm = () => {
 
     try {
       // Example: Send a DELETE request to remove the course
-      const response = await axios.delete(`/api/delete-course/${courseCode}`);
+      const response = await axios.delete(`http://localhost:5000/admin/course/delete`, { data: {Course_Code: courseCode}});
       console.log("Delete course response:", response.data);
       // Add any additional logic or state updates as needed
     } catch (error) {
@@ -24,8 +24,8 @@ const DeleteCourseForm = () => {
         <label>
           Course Code:
           <input
-            type="text"
-            name="courseCode"
+            type="number"
+            name="Course_Code"
             value={courseCode}
             onChange={(e) => setCourseCode(e.target.value)}
             required

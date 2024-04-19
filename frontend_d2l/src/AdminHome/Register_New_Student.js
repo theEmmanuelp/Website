@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+ 
 const RegisterStudent = () => {
   const [studentData, setStudentData] = useState({
     StudentID: '',
@@ -10,25 +10,25 @@ const RegisterStudent = () => {
     Student_Password: '',
     Student_Phone: ''
   });
-
+ 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setStudentData({ ...studentData, [name]: value });
   };
-
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+ 
     try {
       // Example: Send a POST request to register a new student
-      const response = await axios.post("/api/register-student", studentData);
+      const response = await axios.post("http://localhost:5000/student/register", studentData);
       console.log("Student registration response:", response.data);
       // Add any additional logic or state updates as needed
     } catch (error) {
       console.error("Error registering student:", error);
     }
   };
-
+ 
   return (
     <div>
       <h2>Register Student</h2>
@@ -105,5 +105,5 @@ const RegisterStudent = () => {
     </div>
   );
 };
-
+ 
 export default RegisterStudent;

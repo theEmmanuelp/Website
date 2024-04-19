@@ -11,7 +11,7 @@ function Display_Course_Data() {
     }, []);
   
     const fetchCourseData = () => {
-      Axios.get('http://localhost:5000/api/AllCourseData')
+      Axios.get('http://localhost:5000/getCourseData')
         .then((response) => {
           console.log(response.data);
           setCourseData(response.data);

@@ -20,7 +20,7 @@ const AddCourseForm = () => {
 
     try {
       // Example: Send a POST request to add a new course
-      const response = await axios.post("/api/add-course", courseData);
+      const response = await axios.post("http://localhost:5000/admin/course/add", courseData);
       console.log("Add course response:", response.data);
       // Add any additional logic or state updates as needed
     } catch (error) {

@@ -1,21 +1,23 @@
 //js for registering and searching 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../css/Student_ViewingRegistering.css"
 
+let user;
 const Student_ViewingandRegistering = () => {
   const [courseId, setCourseId] = useState('');
-  const [studentId, setStudentId] = useState(''); // Added state for student ID
   const [registeredCourses, setRegisteredCourses] = useState([]);
-
+  const [currentUser, setCurrentUser] = useState(localStorage.getItem("CurrentUser"));
+  
+  
+  // register a new course
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       // Example: Send a POST request to register the student for the course
-      const response = await axios.post("/api/register-course", {
-        courseCode: courseId,
-        studentId: studentId, // Include the student ID in the request
+      const response = await axios.post("http://localhost:5000/student/addcourse", {
+        CourseCode: courseId,
+        StudentID: user.StudentID, // Include the student ID in the request
       });
 
       console.log("Registration response:", response.data);
@@ -26,14 +28,31 @@ const Student_ViewingandRegistering = () => {
       console.error("Error during registration:", error);
     }
   };
+  
+  // unregister from a course
+  const unregisterCourse = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Example: Send a POST request to register the student for the course
+      const response = await axios.post("http://localhost:5000/student/deletecourse", {
+        CourseCode: courseId,
+        StudentID: user.StudentID, // Include the student ID in the request
+      });
+
+      console.log("Deletion response:", response.data);
+
+      // Update the list of registered courses after successful registration
+      fetchRegisteredCourses();
+    } catch (error) {
+      console.error("Error during course removal:", error);
+    }
+  };
 
   const fetchRegisteredCourses = async () => {
     try {
-      // Example: Fetch the list of registered courses for the student
-      const response = await axios.get("/api/registered-courses", {
-        params: { studentId: studentId }, // Include the student ID in the request
-      });
-
+      // Fetch the list of registered courses for the student
+      const response = await axios.post("http://localhost:5000/student/getregisteredcourses", { StudentID: user.StudentID });
       setRegisteredCourses(response.data);
     } catch (error) {
       console.error("Error fetching registered courses:", error);
@@ -43,11 +62,17 @@ const Student_ViewingandRegistering = () => {
   useEffect(() => {
     // Fetch the list of registered courses when the component mounts
     fetchRegisteredCourses();
-  }, [studentId]); // Update the list when the student ID changes
+	setCurrentUser(localStorage.getItem("CurrentUser"));
+	if(currentUser != null){
+		user = JSON.parse(currentUser);
+	}
+  },[]); 
 
-  return (
-    <div className="StudentViewingRegistering">
-      <h2>Please input Course ID and Student ID</h2>
+if(user != null && user.Type == "student"){
+	return (
+	
+    <div>
+      <h2>Register for a new Course</h2>
       <form onSubmit={handleSubmit}>
         <label>
           Course ID:
@@ -61,19 +86,26 @@ const Student_ViewingandRegistering = () => {
           />
         </label>
         <br />
+        <br />
+        <input type="submit" value="Register" />
+      </form>
+	  
+	  <h2>Remove a registered Course</h2>
+      <form onSubmit={unregisterCourse}>
         <label>
-          Student ID:
+          Course ID:
           <input
             type="text"
-            name="StudentID"
-            placeholder="Student ID"
-            value={studentId}
-            onChange={(e) => setStudentId(e.target.value)}
+            name="CourseID"
+            placeholder="Course ID"
+            value={courseId}
+            onChange={(e) => setCourseId(e.target.value)}
             required
           />
         </label>
         <br />
-        <input type="submit" value="Register" />
+        <br />
+        <input type="submit" value="Remove" />
       </form>
 
       <div>
@@ -87,7 +119,14 @@ const Student_ViewingandRegistering = () => {
         </ul>
       </div>
     </div>
-  );
+  )
+}else{
+	return(
+		<h1>Please log in to register for courses</h1>
+	)
+}
+  
+  
 };
 
 export default Student_ViewingandRegistering;

@@ -18,6 +18,9 @@ function Admin_Home_Page() {
         <li>
           <Link to="/RegisterStudent">Register Student</Link>
         </li>
+		<li>
+          <Link to="/FeedbackData">Student Feedback</Link>
+        </li>
       </div>
     </div>
   );
