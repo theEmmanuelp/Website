@@ -2,6 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+you will need microsoft sql server to access the data with the file thats being provided in databasefolder 
+
+
 ## Available Scripts
 
 In the project directory, you can run:
